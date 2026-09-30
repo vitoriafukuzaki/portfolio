@@ -72,3 +72,35 @@ SUMX(
         Sales[Shipping Cost] + ((Sales[Quantity] - 1) * (Sales[Shipping Cost] * 0.7))
     )
 )
+```
+
+### 2. Total Acumulado Baseline (Running Total)
+```dax
+Baseline running total = 
+SUMX(
+    FILTER(
+        ALLSELECTED(Sales),
+        Sales[Transaction Date] <= MAX(Sales[Transaction Date])
+    ),
+    [Shipping (Baseline)]
+)
+
+```
+3. Customer Lifetime Value (LTV Médio)
+```dax
+Customer LTV (avg) = 
+DIVIDE(
+    SUM(Sales[Sales]),
+    [Number of Customers],
+    0
+)
+
+```
+
+## 💡 Principais Recomendações de Negócio
+
+1. **Otimização de Frete (*Upsell* de Quantidade):** Promover pacotes promocionais para os produtos com maior custo por 1.000 milhas (ex: rações e areias sanitárias), reduzindo os custos de envio unitários em até 30%.
+2. **Recomendação no Checkout (*Cross-Sell*):** Configurar o motor de recomendações do site para sugerir *Dog and Puppy Pads* e *Earth Rated Dog Poop Bags* no momento da compra de itens de alimentação canina.
+3. **Foco Geográfico:** Concentrar campanhas regionais nos estados com maior LTV médio (como *North Dakota* e *Delaware*) para maximizar o retorno das campanhas de tráfego pago.  
+
+
